@@ -1,10 +1,11 @@
 #!/bin/bash
 
-SOFTWARES=(firefox skype)
+SOFTWARES=(firefox skype adium)
 
 for SOFTWARE in ${SOFTWARES[@]}; do
     curl -s https://raw.github.com/bitsri/eistut/master/apps/${SOFTWARE} > /tmp/${SOFTWARE}.sh
     source /tmp/${SOFTWARE}.sh
     echo $APP
     echo $VERSION
+    rm -rf /tmp/${SOFTWARE}.sh
 done
