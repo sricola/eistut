@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="Skype"
+VERSION="5.3.59.1093"
+URL="http://download.skype.com/macosx/Skype_5.3.59.1093.dmg"
+

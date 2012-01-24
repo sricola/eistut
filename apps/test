@@ -1,3 +1,10 @@
 #!/bin/bash
 
-. `curl 
+SOFTWARES=(firefox skype)
+
+for SOFTWARE in ${SOFTWARES[@]}; do
+    curl -s https://raw.github.com/bitsri/eistut/master/apps/${SOFTWARE} > /tmp/${SOFTWARE}.sh
+    source /tmp/${SOFTWARE}.sh
+    echo $APP
+    echo $VERSION
+done
