@@ -54,7 +54,7 @@ function install_application () {
 function check_version () {
         
     # get the currently installed version number
-    INSTALLED_VERSION=`defaults read "/Applications/${APP}.app/Contents/Info.plist" "CFBundleShortVersionString"`
+    INSTALLED_VERSION=`defaults read /Applications/${APP}.app/Contents/Info.plist "CFBundleShortVersionString"`
     
     version_compare
     case $? in
@@ -69,12 +69,10 @@ function check_version () {
     esac
 }
 
-if [ -z "${SOFTWARES+xxx}" ]; then
-    SOFTWARES=$@
-fi
+
 
 # cycle through the list of software calling the appropriate actions
-for SOFTWARE in "$SOFTWARES"; do
+for SOFTWARE in "$@"; do
   
     # get the Application's bootstrap script and source it
     curl -s https://raw.github.com/bitsri/eistut/master/apps/${SOFTWARE} > ${TEMP}/${SOFTWARE}.sh
