@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="Google Chrome"
+VERSION="16.0.912.77"
+URL="https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg"
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="Camino"
+VERSION="2.1"
+URL="http://releases.mozilla.org/pub/mozilla.org/camino/releases/Camino-2.1.dmg"
+
