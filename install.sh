@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-SOFTWARES=(firefox adium skype)
 TEMP="/tmp/eistut"
 APPLICATION_PATH="/Applications/"
 
@@ -47,7 +46,7 @@ function version_compare () {
 
 function install_application () {
     echo "\nDownloading ${APP}"
-    curl -# -o ${TEMP}/${APP}.dmg $URL 
+    #curl -# -o ${TEMP}/${APP}.dmg $URL 
   
     #rm -rf ${APPLICATION_PATH}/${APP}.app
 }
@@ -73,7 +72,7 @@ function check_version () {
 
 
 # cycle through the list of software calling the appropriate actions
-for SOFTWARE in ${SOFTWARES[@]}; do
+for SOFTWARE in "$@"; do
   
     # get the Application's bootstrap script and source it
     curl -s https://raw.github.com/bitsri/eistut/master/apps/${SOFTWARE} > ${TEMP}/${SOFTWARE}.sh
