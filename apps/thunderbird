@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="Thunderbird"
+VERSION="9.0.1"
+URL="http://mozilla.mirrors.tds.net/pub/mozilla.org/thunderbird/releases/9.0.1/mac/en-US/Thunderbird%209.0.1.dmg"
+

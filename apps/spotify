@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="Spotify"
+VERSION="0.8.1.64.g5c5914e3"
+URL="http://download.spotify.com/Spotify.dmg"
+

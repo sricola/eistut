@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="Transmission"
+VERSION="2.42"
+URL="http://download.transmissionbt.com/files/Transmission-2.42.dmg"
+
