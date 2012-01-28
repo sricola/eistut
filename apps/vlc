@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="VLC"
+VERSION="1.1.12"
+URL="http://voxel.dl.sourceforge.net/project/vlc/1.1.12/macosx/vlc-1.1.12.dmg"
+

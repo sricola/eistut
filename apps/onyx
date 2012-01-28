@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="OnyX"
+VERSION="2.4.3"
+URL="http://pagesperso-orange.fr/joel.barriere/dl/107/OnyX.dmg"
+

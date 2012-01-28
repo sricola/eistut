@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="The Unarchiver"
+VERSION="2.7.1"
+URL="http://theunarchiver.googlecode.com/files/TheUnarchiver2.7.1.zip"
+

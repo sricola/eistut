@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="SourceTree"
+VERSION="1.2.9.1"
+URL="https://s3.amazonaws.com/downloads.sourcetreeapp.com/SourceTree_1.2.9.1.dmg"
+
