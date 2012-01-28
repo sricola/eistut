@@ -3,7 +3,7 @@
 TEMP="/tmp/eistut"
 APPLICATION_PATH="/Applications/"
 
-SOFTWARES=(opera)
+SOFTWARES=(textwrangler boxee appcleaner)
 
 # check if the temp directory exists and blow it away
 if [ -d "$TEMP" ]; then
@@ -57,12 +57,9 @@ function check_version () {
         
     # get the currently installed version number
     INSTALLED_VERSION=`defaults read "/Applications/${APP}.app/Contents/Info.plist" "CFBundleShortVersionString"`
-    if [[ $INSTALLED_VERSION == *does not exist* ]]
-    then
-        INSTALLED_VERSION=`defaults read "/Applications/${APP}.app/Contents/Info.plist" "CFBundleVersion"`
-    fi
     
     version_compare
+
     case $? in
       0) echo "You have Version: ${INSTALLED_VERSION} \nYou have the latest version installed!\nNo acion needed."
          ;;
