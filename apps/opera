@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="Opera"
+VERSION="11.61"
+URL="http://get3.opera.com/pub/opera/mac/1161/Opera_11.61_Setup_Intel.dmg"
+
