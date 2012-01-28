@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="Picasa"
+VERSION="3.9"
+URL="http://dl.google.com/photos/picasamac39.dmg"
+
