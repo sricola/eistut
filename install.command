@@ -3,7 +3,39 @@
 TEMP="/tmp/eistut"
 APPLICATION_PATH="/Applications/"
 
-SOFTWARES=(textwrangler boxee appcleaner)
+SOFTWARES=(adium
+appcleaner
+audacity
+bean
+boxee
+breakaway
+burn
+camino
+chrome
+cyberduck
+diskwave
+dropbox
+elasticfox
+firefox
+growlf
+handbrake
+iamfox
+iterm
+onyx
+opera
+picasa
+raven
+remotedesktopconnection
+skype
+sourcetree
+spotify
+textwrangler
+theunarchiver
+thunderbird
+transmission
+virtualbox
+vlc
+writeroom)
 
 # check if the temp directory exists and blow it away
 if [ -d "$TEMP" ]; then
@@ -80,9 +112,12 @@ for SOFTWARE in ${SOFTWARES[@]}; do
     source ${TEMP}/${SOFTWARE}.sh
     
     echo "\n--\n${APP}\n--\nVersion: ${VERSION}"
-    
+
+    EXPECTED_APP_PATH="${APPLICATION_PATH}${APP}.app"
+    #echo $EXPECTED_APP_PATH
+
     # check to see if the Application is already installed
-    if [ -d "$APPLICATION_PATH" ]; then
+    if [ -d "${EXPECTED_APP_PATH}" ]; then
         check_version
     else
         install_application
