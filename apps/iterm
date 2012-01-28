@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="iTerm"
+VERSION="1.0.0"
+URL="http://iterm2.googlecode.com/files/iTerm2_v1_0_0.zip"
+

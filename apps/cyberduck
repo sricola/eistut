@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="Cyberduck"
+VERSION="4.2.1"
+URL="http://cyberduck.ch/Cyberduck-4.2.1.zip"
+

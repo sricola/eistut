@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="Elasticfox"
+VERSION="0.3.3"
+URL="https://github.com/downloads/cookpad/elasticfox-ec2tag/Elasticfox-ec2tag_app-0.3.3.dmg"
+
