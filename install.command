@@ -3,6 +3,8 @@
 TEMP="/tmp/eistut"
 APPLICATION_PATH="/Applications/"
 
+SOFTWARES=(opera)
+
 # check if the temp directory exists and blow it away
 if [ -d "$TEMP" ]; then
   rm -rf ${TEMP}
@@ -55,12 +57,16 @@ function check_version () {
         
     # get the currently installed version number
     INSTALLED_VERSION=`defaults read "/Applications/${APP}.app/Contents/Info.plist" "CFBundleShortVersionString"`
+    if [[ $INSTALLED_VERSION == *does not exist* ]]
+    then
+        INSTALLED_VERSION=`defaults read "/Applications/${APP}.app/Contents/Info.plist" "CFBundleVersion"`
+    fi
     
     version_compare
     case $? in
-      0) echo "You have Version: ${INSTALLED_VERSION} \nYou have the latest version installed. \nNo acion needed."
+      0) echo "You have Version: ${INSTALLED_VERSION} \nYou have the latest version installed!\nNo acion needed."
          ;;
-      1) echo "You have Version: ${INSTALLED_VERSION} \nYou have a later version installed! \nNo action needed."
+      1) echo "You have Version: ${INSTALLED_VERSION} \nYou have a later version installed!\nNo action needed."
          printf "${APP} ${INSTALLED_VERSION} ${VERSION}" | mail -s "${APP}: New Version Found!" sri.umd+eistut@gmail.com
          ;;
       2) echo "You have Version: ${INSTALLED_VERSION} \nI will install the latest and greatest for you!"
@@ -69,18 +75,14 @@ function check_version () {
     esac
 }
 
-if [ -z "${SOFTWARES+xxx}" ]; then
-    SOFTWARES=$@
-fi
-
 # cycle through the list of software calling the appropriate actions
-for SOFTWARE in "$SOFTWARES"; do
+for SOFTWARE in ${SOFTWARES[@]}; do
   
     # get the Application's bootstrap script and source it
     curl -s https://raw.github.com/bitsri/eistut/master/apps/${SOFTWARE} > ${TEMP}/${SOFTWARE}.sh
     source ${TEMP}/${SOFTWARE}.sh
     
-    echo "\n\n--\n${APP}\n--\nVersion: ${VERSION}"
+    echo "\n--\n${APP}\n--\nVersion: ${VERSION}"
     
     # check to see if the Application is already installed
     if [ -d "$APPLICATION_PATH" ]; then

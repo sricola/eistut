@@ -1,0 +1,6 @@
+#!/bin/bash
+
+APP="TextWrangler"
+VERSION="3.5.3"
+URL="http://pine.barebones.com/freeware/TextWrangler_3.5.3.dmg"
+
