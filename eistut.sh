@@ -8,10 +8,10 @@ BACKUP_PATH="/tmp/eistut_backup/"
 SOFTWARES=(adium
 # appcleaner
 # audacity
-# bean
+bean
 # boxee
 # breakaway
-# burn
+burn
 # camino
 # chrome
 # cyberduck
@@ -34,7 +34,7 @@ SOFTWARES=(adium
 # textwrangler
 theunarchiver
 thunderbird
-# transmission
+transmission
 # virtualbox
 # vlc
 writeroom)
@@ -89,7 +89,7 @@ function backup_current_application() {
 }
 
 function install_application () {
-    echo "Downloading ${APP}"
+    echo "Downloading ${APP} ..."
     cd ${INSTALLS}
     case "$URL" in
         *zip*)
@@ -100,23 +100,19 @@ function install_application () {
           mv "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
           ;;
         *dmg*)
-          echo "I am a DMG"
           curl -# -o "${APP}.dmg" $URL
           backup_current_application
           mkdir "${TEMP}/curr_dmg"
           yes | /usr/bin/hdiutil mount -mountpoint "${TEMP}/curr_dmg" -nobrowse -quiet "${APP}.dmg"
           cd "${TEMP}/curr_dmg"
-          mv "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
+          cp -R "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
           /usr/bin/hdiutil unmount -quiet "${TEMP}/curr_dmg" -force
+          echo "Done!"
           ;;
         *)
           echo "Invalid Installer"
           ;;
     esac
-    
-    #curl -# -O $URL 
-  
-    #rm -rf ${APPLICATION_PATH}/${APP}.app
 }
 
 function check_version () {
