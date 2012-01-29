@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP="Writeroom"
+APP="WriteRoom"
 VERSION="3.0.1"
 URL="http://writeroom.s3.amazonaws.com/WriteRoom.dmg"
 

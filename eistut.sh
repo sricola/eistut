@@ -33,7 +33,7 @@ SOFTWARES=(adium
 # spotify
 # textwrangler
 theunarchiver
-# thunderbird
+thunderbird
 # transmission
 # virtualbox
 # vlc
@@ -103,6 +103,11 @@ function install_application () {
           echo "I am a DMG"
           curl -# -o "${APP}.dmg" $URL
           backup_current_application
+          mkdir "${TEMP}/curr_dmg"
+          yes | /usr/bin/hdiutil mount -mountpoint "${TEMP}/curr_dmg" -nobrowse -quiet "${APP}.dmg"
+          cd "${TEMP}/curr_dmg"
+          mv "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
+          /usr/bin/hdiutil unmount -quiet "${TEMP}/curr_dmg" -force
           ;;
         *)
           echo "Invalid Installer"
