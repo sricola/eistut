@@ -100,7 +100,7 @@ function install_application () {
           rm -rf "__MACOSX"
           backup_current_application
           echo "Installing new version."
-          cp -r "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
+          cp -r -P "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
           ;;
         *dmg*)
           curl -# -o "${APP}.dmg" $URL
@@ -108,7 +108,7 @@ function install_application () {
           mkdir "${TEMP}/curr_dmg"
           yes | /usr/bin/hdiutil mount -mountpoint "${TEMP}/curr_dmg" -nobrowse -quiet "${APP}.dmg"
           cd "${TEMP}/curr_dmg"
-          cp -r "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
+          cp -r -P "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
           /usr/bin/hdiutil unmount -quiet "${TEMP}/curr_dmg" -force
           rm -rf "${TEMP}/curr_dmg"
           echo "Done!"
