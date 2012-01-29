@@ -6,25 +6,23 @@ INSTALLS="${TEMP}/installs"
 BACKUP_PATH="/tmp/eistut_backup/"
 
 SOFTWARES=(
-adium
-appcleaner
-audacity
-bean
-breakaway
-burn
-camino
-chrome
+# adium
+# appcleaner
+# audacity
+# bean
+# breakaway
+# burn
+# camino
+# chrome
 cyberduck
 diskwave
-dropbox
+# dropbox
 elasticfox
-firefox
-growlf
-handbrake
+# firefox
+# handbrake
 iamfox
-iterm
+# iterm
 onyx
-opera
 picasa
 raven
 remotedesktopconnection
@@ -100,7 +98,7 @@ function install_application () {
           rm -rf "__MACOSX"
           backup_current_application
           echo "Installing new version."
-          cp -r -P "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
+          cp -R -P "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
           ;;
         *dmg*)
           curl -# -o "${APP}.dmg" $URL
@@ -108,7 +106,7 @@ function install_application () {
           mkdir "${TEMP}/curr_dmg"
           yes | /usr/bin/hdiutil mount -mountpoint "${TEMP}/curr_dmg" -nobrowse -quiet "${APP}.dmg"
           cd "${TEMP}/curr_dmg"
-          cp -r -P "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
+          cp -R -P "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
           /usr/bin/hdiutil unmount -quiet "${TEMP}/curr_dmg" -force
           rm -rf "${TEMP}/curr_dmg"
           echo "Done!"
