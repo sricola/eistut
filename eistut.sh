@@ -1,40 +1,42 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 TEMP="/tmp/eistut"
 APPLICATION_PATH="/Applications/"
+INSTALLS="${TEMP}/installs"
+BACKUP_PATH="/tmp/eistut_backup/"
 
 SOFTWARES=(adium
-appcleaner
-audacity
-bean
-boxee
-breakaway
-burn
-camino
-chrome
-cyberduck
-diskwave
-dropbox
-elasticfox
-firefox
-growlf
-handbrake
-iamfox
-iterm
-onyx
-opera
-picasa
-raven
-remotedesktopconnection
-skype
-sourcetree
-spotify
-textwrangler
+# appcleaner
+# audacity
+# bean
+# boxee
+# breakaway
+# burn
+# camino
+# chrome
+# cyberduck
+# diskwave
+# dropbox
+# elasticfox
+# firefox
+# growlf
+# handbrake
+# iamfox
+# iterm
+# onyx
+# opera
+# picasa
+# raven
+# remotedesktopconnection
+# skype
+# sourcetree
+# spotify
+# textwrangler
 theunarchiver
-thunderbird
-transmission
-virtualbox
-vlc
+# thunderbird
+# transmission
+# virtualbox
+# vlc
 writeroom)
 
 # check if the temp directory exists and blow it away
@@ -43,8 +45,8 @@ if [ -d "$TEMP" ]; then
 fi
 
 # make the temp directory
-mkdir -p ${TEMP}
-
+mkdir -p ${INSTALLS}
+mkdir -p ${BACKUP_PATH}
 
 # http://stackoverflow.com/questions/4023830/bash-how-compare-two-strings-in-version-format
 function version_compare () {
@@ -78,9 +80,36 @@ function version_compare () {
     return 0
 }
 
+function backup_current_application() {
+    if [ -d "${EXPECTED_APP_PATH}" ]; then
+      echo "Removing currently installed version"
+      mv "${EXPECTED_APP_PATH}" "${BACKUP_PATH}${APP}.app"
+      #echo "${EXPECTED_APP_PATH}"
+    fi
+}
+
 function install_application () {
-    echo "\nDownloading ${APP}"
-    #curl -# -o ${TEMP}/${APP}.dmg $URL 
+    echo "Downloading ${APP}"
+    cd ${INSTALLS}
+    case "$URL" in
+        *zip*)
+          curl -# -o "${APP}.zip" $URL
+          unzip -qq "${APP}.zip"
+          backup_current_application
+          echo "Installing new version."
+          mv "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
+          ;;
+        *dmg*)
+          echo "I am a DMG"
+          curl -# -o "${APP}.dmg" $URL
+          backup_current_application
+          ;;
+        *)
+          echo "Invalid Installer"
+          ;;
+    esac
+    
+    #curl -# -O $URL 
   
     #rm -rf ${APPLICATION_PATH}/${APP}.app
 }
@@ -93,12 +122,12 @@ function check_version () {
     version_compare
 
     case $? in
-      0) echo "You have Version: ${INSTALLED_VERSION} \nYou have the latest version installed!\nNo acion needed."
+      0) echo "You have Version : ${INSTALLED_VERSION} \nYou have the latest version installed!\nNo acion needed."
          ;;
-      1) echo "You have Version: ${INSTALLED_VERSION} \nYou have a later version installed!\nNo action needed."
+      1) echo "You have Version : ${INSTALLED_VERSION} \nYou have a later version installed!\nNo action needed."
          printf "${APP} ${INSTALLED_VERSION} ${VERSION}" | mail -s "${APP}: New Version Found!" sri.umd+eistut@gmail.com
          ;;
-      2) echo "You have Version: ${INSTALLED_VERSION} \nI will install the latest and greatest for you!"
+      2) echo "You have Version : ${INSTALLED_VERSION} \nI will install the latest and greatest for you!"
          install_application
          ;;
     esac
@@ -111,7 +140,7 @@ for SOFTWARE in ${SOFTWARES[@]}; do
     curl -s https://raw.github.com/bitsri/eistut/master/apps/${SOFTWARE} > ${TEMP}/${SOFTWARE}.sh
     source ${TEMP}/${SOFTWARE}.sh
     
-    echo "\n--\n${APP}\n--\nVersion: ${VERSION}"
+    echo "\n--\n${APP}\n--\nAvailable Version: ${VERSION}"
 
     EXPECTED_APP_PATH="${APPLICATION_PATH}${APP}.app"
     #echo $EXPECTED_APP_PATH
@@ -125,5 +154,5 @@ for SOFTWARE in ${SOFTWARES[@]}; do
       
 done
 
-rm -rf ${TEMP}
+# rm -rf ${TEMP}
 echo "\n\n\nDone!"
