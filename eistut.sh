@@ -1,43 +1,44 @@
 #!/bin/bash
 
 TEMP="/tmp/eistut"
-APPLICATION_PATH="/Applications/"
+APPLICATION_PATH="/sri_apps/"
 INSTALLS="${TEMP}/installs"
 BACKUP_PATH="/tmp/eistut_backup/"
 
-SOFTWARES=(adium
-# appcleaner
-# audacity
+SOFTWARES=(
+adium
+appcleaner
+audacity
 bean
-# boxee
-# breakaway
+breakaway
 burn
-# camino
-# chrome
-# cyberduck
-# diskwave
-# dropbox
-# elasticfox
-# firefox
-# growlf
-# handbrake
-# iamfox
-# iterm
-# onyx
-# opera
-# picasa
-# raven
-# remotedesktopconnection
-# skype
-# sourcetree
-# spotify
-# textwrangler
+camino
+chrome
+cyberduck
+diskwave
+dropbox
+elasticfox
+firefox
+growlf
+handbrake
+iamfox
+iterm
+onyx
+opera
+picasa
+raven
+remotedesktopconnection
+skype
+sourcetree
+spotify
+textwrangler
 theunarchiver
 thunderbird
 transmission
-# virtualbox
-# vlc
-writeroom)
+virtualbox
+vlc
+writeroom
+)
 
 # check if the temp directory exists and blow it away
 if [ -d "$TEMP" ]; then
@@ -94,10 +95,12 @@ function install_application () {
     case "$URL" in
         *zip*)
           curl -# -o "${APP}.zip" $URL
-          unzip -qq "${APP}.zip"
+          echo "Installing ${APP} ..."
+          unzip -u -qq "${APP}.zip"
+          rm -rf "__MACOSX"
           backup_current_application
           echo "Installing new version."
-          mv "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
+          cp -r "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
           ;;
         *dmg*)
           curl -# -o "${APP}.dmg" $URL
@@ -105,8 +108,9 @@ function install_application () {
           mkdir "${TEMP}/curr_dmg"
           yes | /usr/bin/hdiutil mount -mountpoint "${TEMP}/curr_dmg" -nobrowse -quiet "${APP}.dmg"
           cd "${TEMP}/curr_dmg"
-          cp -R "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
+          cp -r "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
           /usr/bin/hdiutil unmount -quiet "${TEMP}/curr_dmg" -force
+          rm -rf "${TEMP}/curr_dmg"
           echo "Done!"
           ;;
         *)
