@@ -7,7 +7,7 @@ BACKUP_PATH="/tmp/eistut_backup/"
 
 if [[ `hostname` =~ sri-air.local ]]; then
   echo "Hi Sri!"
-  APPLICATIONS_PATH="/sri_apps/"
+  APPLICATION_PATH="/sri_apps/"
 fi
 
 SOFTWARES=(
