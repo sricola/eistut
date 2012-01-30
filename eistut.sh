@@ -5,7 +5,7 @@ APPLICATION_PATH="/Applications/"
 INSTALLS="${TEMP}/installs"
 BACKUP_PATH="/tmp/eistut_backup/"
 
-if [[ `hostname` =~ sri-air.local ]]
+if [[ `hostname` =~ sri-air.local ]]; then
   echo "Hi Sri!"
   APPLICATIONS_PATH="/sri_apps/"
 fi
