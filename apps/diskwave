@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP="Diskwave"
+APP="DiskWave"
 VERSION="0.3.0"
 URL="http://diskwave.barthe.ph/download/DiskWave_0.3.dmg"
 

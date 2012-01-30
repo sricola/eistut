@@ -1,31 +1,35 @@
 #!/bin/bash
 
 TEMP="/tmp/eistut"
-APPLICATION_PATH="/sri_apps/"
+APPLICATION_PATH="/Applications/"
 INSTALLS="${TEMP}/installs"
 BACKUP_PATH="/tmp/eistut_backup/"
 
+if [[ `hostname` =~ sri-air.local ]]
+  echo "Hi Sri!"
+  APPLICATIONS_PATH="/sri_apps/"
+fi
+
 SOFTWARES=(
-# adium
-# appcleaner
-# audacity
-# bean
-# breakaway
-# burn
-# camino
-# chrome
+adium
+appcleaner
+audacity
+bean
+breakaway
+burn
+camino
+chrome
 cyberduck
 diskwave
-# dropbox
+dropbox
 elasticfox
-# firefox
-# handbrake
+firefox
+handbrake
 iamfox
-# iterm
+iterm
 onyx
 picasa
 raven
-remotedesktopconnection
 skype
 sourcetree
 spotify
@@ -33,7 +37,6 @@ textwrangler
 theunarchiver
 thunderbird
 transmission
-virtualbox
 vlc
 writeroom
 )
@@ -92,7 +95,7 @@ function install_application () {
     cd ${INSTALLS}
     case "$URL" in
         *zip*)
-          curl -# -o "${APP}.zip" $URL
+          curl -L -# -o "${APP}.zip" $URL
           echo "Installing ${APP} ..."
           unzip -u -qq "${APP}.zip"
           rm -rf "__MACOSX"
@@ -101,11 +104,12 @@ function install_application () {
           cp -R -P "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
           ;;
         *dmg*)
-          curl -# -o "${APP}.dmg" $URL
+          curl -L -# -o "${APP}.dmg" $URL
           backup_current_application
           mkdir "${TEMP}/curr_dmg"
           yes | /usr/bin/hdiutil mount -mountpoint "${TEMP}/curr_dmg" -nobrowse -quiet "${APP}.dmg"
           cd "${TEMP}/curr_dmg"
+          echo "Installing ${APP} ..."
           cp -R -P "`find . -name "${APP}.app"`" "${APPLICATION_PATH}"
           /usr/bin/hdiutil unmount -quiet "${TEMP}/curr_dmg" -force
           rm -rf "${TEMP}/curr_dmg"
@@ -137,7 +141,8 @@ function check_version () {
 }
 
 # cycle through the list of software calling the appropriate actions
-for SOFTWARE in ${SOFTWARES[@]}; do
+for SOFTWARE in ${SOFTWARES[@]}; 
+do
   
     # get the Application's bootstrap script and source it
     curl -s https://raw.github.com/bitsri/eistut/master/apps/${SOFTWARE} > ${TEMP}/${SOFTWARE}.sh
@@ -153,7 +158,7 @@ for SOFTWARE in ${SOFTWARES[@]}; do
         check_version
     else
         install_application
-    fi  
+    fi
       
 done
 

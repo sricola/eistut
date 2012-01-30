@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP="IAMfox"
+APP="IAMFox"
 VERSION="0.1.5"
 URL="https://github.com/downloads/cookpad/iam-fox/IAMFox_app-0.1.5.dmg"
 
