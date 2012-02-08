@@ -122,9 +122,14 @@ function install_application () {
 }
 
 function check_version () {
-        
+    
+
     # get the currently installed version number
-    INSTALLED_VERSION=`defaults read "/Applications/${APP}.app/Contents/Info.plist" "CFBundleShortVersionString"`
+    if [ "$APP" == "Breakaway" ]; then
+        INSTALLED_VERSION=`defaults read "${EXPECTED_APP_PATH}/Contents/Info.plist" "CFBundleVersion"`
+    else
+        INSTALLED_VERSION=`defaults read "${EXPECTED_APP_PATH}/Contents/Info.plist" "CFBundleShortVersionString"`
+    fi
     
     version_compare
 
